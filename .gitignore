@@ -1,0 +1,29 @@
+#TreeCmp files
+*.Cmp
+
+#R data
+*.Rda
+
+
+# LaTeX #
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fff
+*.lof
+*.lot
+*.out
+*.toc
+*.ttt
+*.fdb_latexmk
+*.pdf
+
+
+# OS generated files #
+*.DS_Store
+
+
+# R #
+*.Rhistory
+*.Rapp.history

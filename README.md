@@ -1,4 +1,2 @@
 # LaTeX
-Learning LaTeX is fun!
-
-# Yay
+This repository contain some materials for learning LaTeX

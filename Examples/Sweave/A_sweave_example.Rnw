@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm} % Settings for sweave
+\setcounter{secnumdepth}{2} % Settings for sweave
+\setcounter{tocdepth}{2} % Settings for sweave
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, % Settings for sweave
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, % Settings for sweave
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false] % Settings for sweave
+ {hyperref} % Settings for sweave
+\hypersetup{ % Settings for sweave
+ pdfstartview={XYZ null null 1}} % Settings for sweave
+
+\begin{document}
+ % Settings for sweave:
+<<setup, include=FALSE, cache=FALSE>>=
+if(!require(knitr)) install.packages("knitr")
+library(knitr)
+# set global chunk options
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold')
+options(formatR.arrow=TRUE,width=90)
+@
+
+\title{LaTeX using sweave}
+
+\author{Thomas Guillerme\\t.guillerme@imperial.ac.uk}
+
+
+\maketitle
+
+This is a really quick demo to show some integration between LaTeX and \texttt{R} via \href{http://yihui.name/knitr/}{knitr} that allows to include everything (the text, the \texttt{R} code and the results) in a single document using \textbf{Sweave} language (.Rnw).
+
+\section{Introduction}
+
+Let's start with a first sentence. And then get some cites to support it \cite{Cooper2008,Brazeau2011,harrisonamong-character2014}.
+
+\section{Material and Methods}
+\subsection{Material}
+I got my data from thin air.
+
+<<data>>=
+## Generating some data
+data1 <- rnorm(100)
+data2 <- rnorm(100)
+@ 
+
+\subsection{Methods}
+\label{methods}
+\texttt{R} is awesome for doing some analysis \cite{R}.
+And it can use pretty sophisticate equations like the Mind Blowing Metric Quotient (MBMQ):
+  \begin{equation}
+  \label{equation}
+        MBMQ=\frac{\sum{observations}}{n}
+  \end{equation}
+where \textit{n} is the total number of \textit{observations}.
+
+<<function>>=
+## The Mind Blowing Metric Quotient function
+MBMQ <- function(X) {
+    return(sum(X)/length(X))
+}
+@ 
+
+\section{Results}
+Now let's check the results in a table:
+
+<<table>>=
+## My results in a table
+matrix(c(MBMQ(data1), MBMQ(data1)), nrow = 1, ncol = 2, byrow = TRUE,
+    dimnames = list(c("Mind Blowing"), c("Data 1", "Data 2")))
+@ 
+
+Or even with some more fancy analysis and a plot
+<<lm, fig.width=8, fig.height=8, out.width='.8\\linewidth'>>=
+model <- summary(lm(data1 ~ data2))
+plot(data2, data1, pch = 19, col = "grey")
+abline(model$coefficients[[1]], model$coefficients[[2]])
+@
+
+This model doesn't fit super well, it has a \textit{R$^2$} of \Sexpr{model$r.squared}!
+
+\bibliographystyle{vancouver}
+\bibliography{References}
+
+\end{document}

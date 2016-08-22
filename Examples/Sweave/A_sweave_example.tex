@@ -1,0 +1,157 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm} % Settings for sweave
+\setcounter{secnumdepth}{2} % Settings for sweave
+\setcounter{tocdepth}{2} % Settings for sweave
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, % Settings for sweave
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, % Settings for sweave
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false] % Settings for sweave
+ {hyperref} % Settings for sweave
+\hypersetup{ % Settings for sweave
+ pdfstartview={XYZ null null 1}} % Settings for sweave
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+ % Settings for sweave:
+
+
+\title{LaTeX using sweave}
+
+\author{Thomas Guillerme\\t.guillerme@imperial.ac.uk}
+
+
+\maketitle
+
+This is a really quick demo to show some integration between LaTeX and \texttt{R} via \href{http://yihui.name/knitr/}{knitr} that allows to include everything (the text, the \texttt{R} code and the results) in a single document using \textbf{Sweave} language (.Rnw).
+
+\section{Introduction}
+
+Let's start with a first sentence. And then get some cites to support it \cite{Cooper2008,Brazeau2011,harrisonamong-character2014}.
+
+\section{Material and Methods}
+\subsection{Material}
+I got my data from thin air.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## Generating some data}
+\hlstd{data1} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{100}\hlstd{)}
+\hlstd{data2} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{100}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsection{Methods}
+\label{methods}
+\texttt{R} is awesome for doing some analysis \cite{R}.
+And it can use pretty sophisticate equations like the Mind Blowing Metric Quotient (MBMQ):
+  \begin{equation}
+  \label{equation}
+        MBMQ=\frac{\sum{observations}}{n}
+  \end{equation}
+where \textit{n} is the total number of \textit{observations}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## The Mind Blowing Metric Quotient function}
+\hlstd{MBMQ} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{X}\hlstd{) \{}
+    \hlkwd{return}\hlstd{(}\hlkwd{sum}\hlstd{(X)}\hlopt{/}\hlkwd{length}\hlstd{(X))}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\section{Results}
+Now let's check the results in a table:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{## My results in a table}
+\hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlkwd{MBMQ}\hlstd{(data1),} \hlkwd{MBMQ}\hlstd{(data1)),} \hlkwc{nrow} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{byrow} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+    \hlkwc{dimnames} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"Mind Blowing"}\hlstd{),} \hlkwd{c}\hlstd{(}\hlstr{"Data 1"}\hlstd{,} \hlstr{"Data 2"}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##                  Data 1     Data 2
+## Mind Blowing 0.02755136 0.02755136
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Or even with some more fancy analysis and a plot
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{model} \hlkwb{<-} \hlkwd{summary}\hlstd{(}\hlkwd{lm}\hlstd{(data1} \hlopt{~} \hlstd{data2))}
+\hlkwd{plot}\hlstd{(data2, data1,} \hlkwc{pch} \hlstd{=} \hlnum{19}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"grey"}\hlstd{)}
+\hlkwd{abline}\hlstd{(model}\hlopt{$}\hlstd{coefficients[[}\hlnum{1}\hlstd{]], model}\hlopt{$}\hlstd{coefficients[[}\hlnum{2}\hlstd{]])}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=.8\linewidth]{figure/minimal-lm-1} 
+
+}
+
+
+
+\end{knitrout}
+
+This model doesn't fit super well, it has a \textit{R$^2$} of 0.013882!
+
+\bibliographystyle{vancouver}
+\bibliography{References}
+
+\end{document}
